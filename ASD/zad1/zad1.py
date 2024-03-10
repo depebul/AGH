@@ -5,7 +5,7 @@ from zad1testy import Node, runtests
 # jako jedynie miejscę na wartość, pierwsza pętla zależna od zmiennej p służy za ogólne poruszanie
 # się po liście, pętla zależna od zmiennej jumper polega na znajdywaniu w odległości conajwyżej k
 # najmniejszej wartości aby zamienić jej wartość z polem p.val
-
+# jego złożoność czasowa dla k = Θ(1) wynosi n, k = Θ(log n) wynosi nlogn oraz k = Θ(n) wynosi n^2
 
 
 def SortH(p,k):
