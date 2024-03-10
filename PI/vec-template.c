@@ -4,6 +4,11 @@
 // generates the n-element sequence by incrementing the start value
 // using the step size
 void range(double v[], int n, double start, double step) {
+    double cur_val = start;
+    for(int i = 0; i < n; i++){
+        v[i] = cur_val;
+        cur_val += step;
+    }
 }
 
 // Returns n evenly spaced samples, calculated over the interval [start, stop].
@@ -11,18 +16,43 @@ void range(double v[], int n, double start, double step) {
 // for n = 0 return empty array
 // for n = 1 return one-element array, with array[0] = start
 void linspace(double v[], double start, double stop, int n) {
+    if(n == 0){
+        return;
+    }
+    else if(n == 1){
+        v[0] = start;
+        return;
+    }
+
+    double step = (stop - start) / (n - 1);
+    double cur_val = start;
+    for(int i = 0; i < n; i++){
+        v[i] = cur_val;
+        cur_val += step;
+    }
 }
 
 // multiply each element of v by the value of scalar
 void multiply_by_scalar(double v[], int n, double scalar) {
+    for(int i = 0; i < n; i++){
+        v[i] = v[i]*scalar;
+    }
 }
 
 // add to each element v1[i] value of v2[i]
 void add(double v1[], const double v2[], int n) {
+    for(int i = 0; i < n; i++){
+        v1[i] = v1[i] + v2[i];
+    }
 }
 
 // calculate and return the dot product of v1 and v2
 double dot_product(const double v1[], const double v2[], int n) {
+    double product = 0;
+    for(int i = 0; i < n; i++){
+        product += v1[i]*v2[i];
+    }
+    return product;
 }
 
 // read double vector of size n
