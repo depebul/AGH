@@ -2,7 +2,6 @@ from zad2testy import runtests
 
 def ksum(T, k, p):
     n = len(T)
-    ind = 0
     templist = makelist(T,p)
     sum = templist[p - k]
     i = 0
