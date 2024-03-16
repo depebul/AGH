@@ -1,4 +1,5 @@
 from zad1testy import Node, runtests
+
 # Dawid Żak, do tego zadania wykorzystałem algorytm sortujący selection sort
 # ponieważ jest to lista jednokierunkowa, zdecydowałem się na zamianę wartości
 # w polu value między "Node"ami, obiekt Node uznaję analogicznie do zwykłego algorytmu
