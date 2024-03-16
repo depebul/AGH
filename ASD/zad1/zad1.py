@@ -1,11 +1,12 @@
 from zad1testy import Node, runtests
+
 # Dawid Żak, do tego zadania wykorzystałem algorytm sortujący selection sort
 # ponieważ jest to lista jednokierunkowa, zdecydowałem się na zamianę wartości
 # w polu value między "Node"ami, obiekt Node uznaję analogicznie do zwykłego algorytmu
 # jako jedynie miejscę na wartość, pierwsza pętla zależna od zmiennej p służy za ogólne poruszanie
 # się po liście, pętla zależna od zmiennej jumper polega na znajdywaniu w odległości conajwyżej k
 # najmniejszej wartości aby zamienić jej wartość z polem p.val
-
+# jego złożoność czasowa dla k = Θ(1) wynosi n, k = Θ(log n) wynosi nlogn oraz k = Θ(n) wynosi n^2
 
 
 def SortH(p,k):
