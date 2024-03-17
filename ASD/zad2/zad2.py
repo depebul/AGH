@@ -1,8 +1,8 @@
 # Dawid Żak mój algorytm polega na tym iż na początku tworzy posortowaną tablicę p elementową przy pomocy
 # quick sorta, podczas następnych pętli usuwa element który znajdował się w poprzednim zakresie p i dodaje następny
-# element, który ma znaleźć się w zakresie p, wykorzystuje do jego znalezienia algorytm binary searcha do usunięcia
+# element, który ma znaleźć się w zakresie p, wykorzystuje do jego znalezienia algorytm binary search, do usunięcia
 # elementu z templist stosuje funkcję del i do wstawienia używa insert. Algorytm ten posiada złożoność czasową O(np)
-# złożoność pamięciową O(p)
+# i złożoność pamięciową O(p)
 
 
 from zad2testy import runtests
