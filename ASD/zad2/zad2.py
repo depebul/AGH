@@ -36,16 +36,6 @@ def binary_search(arr, target):
             right = mid - 1
     return left
 
-def partition(arr,l,h):
-    i = ( l - 1 )
-    x = arr[h]
-    for j in range(l , h):
-        if arr[j] <= x:
-            i = i+1
-            arr[i],arr[j] = arr[j],arr[i]
-    arr[i+1],arr[h] = arr[h],arr[i+1]
-    return (i+1)
-
 def quick_sort(arr):
     if len(arr) <= 1:
         return arr
