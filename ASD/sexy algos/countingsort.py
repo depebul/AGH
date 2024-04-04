@@ -9,5 +9,5 @@ def counting_sort(A,k):
     for i in range(n-1,-1,-1):
         B[C[A[i]] - 1] = A[i]
         C[A[i]] -= 1
-        for i in range(n):
-            A[i] = B[i]
+    for i in range(n):
+        A[i] = B[i]
