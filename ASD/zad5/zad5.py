@@ -1,22 +1,13 @@
 from zad5testy import runtests
-
-E = [(0,1, 5),
-     (1,2,21),
-     (1,3, 1),
-     (2,4, 7),
-     (3,4,13),
-     (3,5,16),
-     (4,6, 4),
-     (5,6, 1)]
-S = [ 0, 2, 3 ]
-a = 1
-b = 5
-n = 7
-
+from queue import PriorityQueue
 
 def spacetravel( n, E, S, a, b ):
     n = max(E, key=lambda x: x[1])[1] + 1
     neighbours = [[] for _ in range(n)]
+    isanomaly = [False]*n
+    for el in S:
+        isanomaly[el] = True
+
     if a in S and b in S:
         return 0
     elif a in S:
@@ -25,18 +16,47 @@ def spacetravel( n, E, S, a, b ):
         name = b
     else:
         name = S[0]
-    brolist = []
     for i in range(len(E)):
-        if E[i][0] not in S:
-            continue
+        if isanomaly[E[i][0]]:
+            E[i] = (name, E[i][1], E[i][2])
+        if isanomaly[E[i][1]]:
+            E[i] = (E[i][0], name, E[i][2])
+    brolist = [False]*n
+    broweight = [float("inf")]*n
 
-    print(E)
     for i in range(len(E)):
-        neighbours[E[i][0]].append([E[i][1], E[i][2]])
-        neighbours[E[i][1]].append([E[i][0], E[i][2]])
+        if isanomaly[E[i][0]]:
+            brolist[E[i][1]] = True
+            broweight[E[i][1]] = min(E[i][2],broweight[E[i][1]])
+        elif isanomaly[E[i][1]]:
+            brolist[E[i][0]] = True
+            broweight[E[i][0]] = min(E[i][2],broweight[E[i][0]])
+        else:
+            neighbours[E[i][0]].append([E[i][1], E[i][2]])
+            neighbours[E[i][1]].append([E[i][0], E[i][2]])
+    for i in range(len(brolist)):
+        if brolist[i]:
+            neighbours[name].append([i, broweight[i]])
+            neighbours[i].append([name, broweight[i]])
+    q = PriorityQueue()
+    distance = [float("inf")]*(len(neighbours) + 1)
+    q.put((0, a))
+    distance[a] = 0
 
+    def relax(distance, v, w, u):
+        if distance[v] > distance[u] + w:
+            distance[v] = distance[u] + w
+            return True
+        return False
 
+    while not q.empty():
+        dist, u = q.get()
+        for v, w in neighbours[u]:
+            if relax(distance, v, w, u):
+                q.put((distance[v], v))
+    if distance[b] == float("inf"):
+        return None
+    return distance[b]
 
-spacetravel( n, E, S, a, b )
 # zmien all_tests na True zeby uruchomic wszystkie testy
-# runtests( spacetravel, all_tests = False )
+runtests( spacetravel, all_tests = True )
