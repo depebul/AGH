@@ -22,7 +22,7 @@ def maxrank(T):
     for i in range(len(T)):
         newlist.append((T[i], i))
     Ti = quicksort(newlist)
-    orderlist = [0]*(len(T) + 1 )
+    orderlist = [0]*(len(T))
     for i in range(len(T)):
         orderlist[Ti[i][1]] = i
     tab = [0]*len(T)
