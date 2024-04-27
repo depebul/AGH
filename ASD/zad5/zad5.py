@@ -1,3 +1,11 @@
+# Dawid Żak, mój kod wykorzystuje algorytm Dijkstry, na zmienionym wcześniej grafie, gdzie wierzchołki z listy S,
+# zostały połączone w jeden wierzchołek, najpierw zmodyfikowałem liste krawędzi, podmieniając wszystkie wierzchołki z
+# listy S na wcześniej wybrany wierzchołek, następnie zbudowałem listę sąsiedztwa, jeśli krawędź dotyczyła wierzchołka
+# z listy S, to odległość przepisywałem do tablicy broweight, przy użyciu funkcji min() i dodawałem je następnie do listy
+# sąsiedztwa, następnie wykorzystałem algorytm Dijkstry, zaczynając od wierzchołka a, a kończąc na wierzchołku b.
+# złożoność czasowa to O(ElogV), a pamięciowa to O(V+E), gdzie V to liczba wierzchołków, a E to liczba krawędzi.
+
+
 from zad5testy import runtests
 from queue import PriorityQueue
 
