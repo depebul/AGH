@@ -18,9 +18,9 @@ def quicksort(T):
         return quicksort(less_than_pivot) + [pivot] + quicksort(greater_than_pivot)
 
 def maxrank(T):
-    newlist = []
+    newlist = [0]*len(T)
     for i in range(len(T)):
-        newlist.append((T[i], i))
+        newlist[i] = ((T[i], i))
     Ti = quicksort(newlist)
     orderlist = [0]*(len(T))
     for i in range(len(T)):
