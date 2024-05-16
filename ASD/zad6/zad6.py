@@ -26,6 +26,8 @@ def jumper(G, s, w):
         dist, u, way = q.get()
         if u == w:
             do_w = min(do_w, dist)
+        if visited[w] and visited_boots[w]:
+            return do_w
         if way:
             visited_boots[u] = True
         else:
