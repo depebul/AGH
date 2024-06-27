@@ -3,41 +3,43 @@
 # złożoność czasowa to O(ElogV)
 
 
-from kol2testy import runtests
 from queue import PriorityQueue
-def warrior( G, s, t):
-  n = max(G, key=lambda x: x[1])[1] + 1
+from kol2testy import runtests
+
+def warrior(G, s, t):
+  n = max(max(u, v) for u, v, _ in G) + 1
   neighbours = [[] for _ in range(n)]
-  for i in range(len(G)):
-    neighbours[G[i][0]].append([G[i][1], G[i][2]])
-    neighbours[G[i][1]].append([G[i][0], G[i][2]])
+
+  for u, v, w in G:
+    neighbours[u].append((v, w))
+    neighbours[v].append((u, w))
+
   q = PriorityQueue()
-  distance = [float("inf")]*(len(neighbours) + 1)
-  q.put((0, s))
-  distance[s] = 0
-  fatigue_list = [float("inf")]*(len(neighbours) + 1)
-  fatigue_list[s] = 0
-  def relax(distance, v, w, u, added, new_fatigue):
-    if distance[v] > distance[u] + w + added:
-      distance[v] = distance[u] + w + added
-      fatigue_list[v] = new_fatigue
-      return True
-    return False
+  distance = [[float("inf")] * 17 for _ in range(n)]
+  distance[s][0] = 0
+  q.put((0, s, 0))  # (total_time, current_node, hours_without_rest)
+
   while not q.empty():
-    dist, u = q.get()
+    total_time, u, fatigue = q.get()
+
+    if u == t:
+      return total_time
+
     for v, w in neighbours[u]:
-      new_fatigue = fatigue_list[u]
-      added = 0
-      new_fatigue += w
+      new_fatigue = fatigue + w
       if new_fatigue > 16:
-        new_fatigue = 0
-        added = 8
-      if relax(distance, v, w, u, added,new_fatigue):
-        q.put((distance[v], v))
+        new_fatigue = w
+        new_total_time = total_time + w + 8  # Dodajemy czas odpoczynku
+      else:
+        new_total_time = total_time + w
 
-  if distance[t] == float("inf"):
-    return None
-  return distance[t]
+      if distance[v][new_fatigue] > new_total_time:
+        distance[v][new_fatigue] = new_total_time
+        q.put((new_total_time, v, new_fatigue))
 
-# zmien all_tests na True zeby uruchomic wszystkie testy
-runtests( warrior, all_tests = True )
+  return None if min(distance[t]) == float("inf") else min(distance[t])
+
+# Zmien all_tests na True zeby uruchomic wszystkie testy
+runtests(warrior, all_tests=True)
+
+

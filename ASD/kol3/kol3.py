@@ -17,11 +17,40 @@ def orchard(T, m):
         new_tab = tab[:]
         for j in range(m):
             new_reszta = (j + T[i]) % m
-            new_tab[new_reszta] = min(new_tab[new_reszta], tab[j] + 1)
+            new_tab[new_reszta] = min(tab[new_reszta], tab[j] + 1)
         tab = new_tab
+        print(new_tab)
     return tab[reszta]
 
 
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-runtests(orchard, all_tests=True)
+from math import inf
+
+# def orchard(T, m):
+#     n = len(T)
+#     # dp[modulo m] = max ilość niewycietych drzew
+#     dp = [-inf] * m
+#     dp[0] = 0
+#     dp[T[0] % m] = 1
+#     dp2 = [-inf] * m
+#     for i in range(1, n):
+#         for mod in range(m):
+#             dp2[mod] = max(dp[mod], dp[(mod - T[i]) % m] + 1)
+#         dp, dp2 = dp2, dp
+#     return n - dp[0]
+def orchard(T, m):
+    n = len(T)
+    tab = [inf] * m
+    tab[0] = 0
+    for i in range(n):
+        new_tab = tab[:]
+        for j in range(m):
+            new_reszta = (T[i] + j) % m
+            new_tab[new_reszta] = min(new_tab[new_reszta] + 1, tab[j])
+        tab = new_tab
+
+    return tab[0]
+
+
+runtests(orchard, all_tests=False)
